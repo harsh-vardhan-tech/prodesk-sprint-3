@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev-Detective | GitHub Profile Search & Battle</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="logo-title">Dev-Detective</h1>
+          <p class="logo-tagline">GitHub Profile Search & Battle Arena</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <!-- Mode Switcher -->
+        <div class="mode-switcher">
+          <button id="searchModeBtn" class="mode-tab active" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Search Mode
+          </button>
+          <button id="battleModeBtn" class="mode-tab" type="button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Battle Mode
+          </button>
+        </div>
+
+        <!-- Token Settings Button -->
+        <button id="tokenToggleBtn" class="icon-btn" title="GitHub API Token (Optional)" aria-label="API Token Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggleBtn" class="theme-toggle" type="button" aria-label="Toggle theme">
+          <span class="theme-text">LIGHT</span>
+          <span class="theme-icon">
+            <svg id="sunIcon" class="hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moonIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Token Settings Modal / Bar -->
+    <div id="tokenBar" class="token-bar hidden">
+      <div class="token-content">
+        <div class="token-info">
+          <strong>GitHub Token (Optional):</strong> Unauthenticated API has a 60 requests/hour limit. You can add a GitHub Personal Access Token (classic or fine-grained) to increase rate limits to 5,000/hr.
+        </div>
+        <div class="token-input-row">
+          <input type="password" id="githubTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+          <button id="saveTokenBtn" class="btn btn-sm">Save Token</button>
+          <button id="clearTokenBtn" class="btn btn-sm btn-ghost">Clear</button>
+        </div>
+        <p id="tokenStatusMsg" class="token-status"></p>
+      </div>
+    </div>
+
+    <!-- ==================== MODE 1: SINGLE SEARCH MODE ==================== -->
+    <main id="singleSearchSection" class="active-section">
+      
+      <!-- Search Form -->
+      <form id="searchForm" class="search-bar" role="search">
+        <div class="search-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </div>
+        <input 
+          type="text" 
+          id="usernameInput" 
+          placeholder="Search GitHub username..." 
+          autocomplete="off" 
+          spellcheck="false" 
+          required
+        >
+        <span id="searchErrorHint" class="search-error-text hidden">No results</span>
+        <button type="submit" id="searchBtn" class="btn search-btn">
+          <span class="btn-text">Search</span>
+        </button>
+      </form>
+
+      <!-- Quick Suggestion Chips -->
+      <div class="quick-chips">
+        <span class="chips-label">Try searching:</span>
+        <button type="button" class="chip-btn" data-user="octocat">octocat</button>
+        <button type="button" class="chip-btn" data-user="torvalds">torvalds</button>
+        <button type="button" class="chip-btn" data-user="gaearon">gaearon</button>
+        <button type="button" class="chip-btn" data-user="harsh-vardhan-tech">harsh-vardhan-tech</button>
+      </div>
+
+      <!-- State: Loading Spinner -->
+      <div id="loadingIndicator" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p class="loading-title">Hunting GitHub data...</p>
+        <p class="loading-subtitle">Resolving HTTP promise and parsing JSON payload</p>
+      </div>
+
+      <!-- State: Error State (404 Not Found) -->
+      <div id="errorState" class="error-state hidden">
+        <div class="error-card">
+          <div class="error-illustration">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h2 id="errorTitle" class="error-heading">User Not Found</h2>
+          <p id="errorDescription" class="error-message">
+            We couldn't find any GitHub account matching this username. Please verify the spelling or try searching another developer.
+          </p>
+          <div class="error-actions">
+            <button id="errorRetryBtn" class="btn btn-sm" type="button">Try "octocat"</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Container -->
+      <div id="profileContainer" class="profile-container">
+        <!-- Main Profile Card (Phase 1) -->
+        <article id="profileCard" class="profile-card">
+          
+          <div class="profile-header">
+            <img id="userAvatar" class="user-avatar" src="https://avatars.githubusercontent.com/u/583231?v=4" alt="User avatar">
+            <div class="profile-identity">
+              <div class="name-row">
+                <h2 id="userName" class="user-name">The Octocat</h2>
+                <span id="userJoined" class="user-joined">Joined 25 Jan 2011</span>
+              </div>
+              <a id="userLoginLink" class="user-handle" href="https://github.com/octocat" target="_blank" rel="noopener noreferrer">@octocat</a>
+              <p id="userBio" class="user-bio">This profile has no bio</p>
+            </div>
+          </div>
+
+          <!-- Quick Stats Box -->
+          <div class="stats-box">
+            <div class="stat-item">
+              <span class="stat-label">Repos</span>
+              <span id="statRepos" class="stat-value">8</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Followers</span>
+              <span id="statFollowers" class="stat-value">9800</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Following</span>
+              <span id="statFollowing" class="stat-value">9</span>
+            </div>
+          </div>
+
+          <!-- Metadata Links Grid -->
+          <div class="meta-grid">
+            
+            <div id="metaLocationWrapper" class="meta-item">
+              <span class="meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </span>
+              <span id="metaLocation" class="meta-text">San Francisco</span>
+            </div>
+
+            <div id="metaBlogWrapper" class="meta-item">
+              <span class="meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+              </span>
+              <a id="metaBlog" class="meta-link" href="https://github.blog" target="_blank" rel="noopener noreferrer">https://github.blog</a>
+            </div>
+
+            <div id="metaTwitterWrapper" class="meta-item">
+              <span class="meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                </svg>
+              </span>
+              <a id="metaTwitter" class="meta-link" href="#" target="_blank" rel="noopener noreferrer">Not Available</a>
+            </div>
+
+            <div id="metaCompanyWrapper" class="meta-item">
+              <span class="meta-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+              </span>
+              <span id="metaCompany" class="meta-text">@github</span>
+            </div>
+
+          </div>
+
+        </article>
+
+        <!-- Repositories Section (Phase 2 - Endpoint Chaining & Top 5 List) -->
+        <section id="reposSection" class="repos-section">
+          <div class="repos-header">
+            <div>
+              <h3 class="repos-title">Top 5 Latest Repositories</h3>
+              <p class="repos-subtitle">Fetched via secondary endpoint chaining (<code class="code-tag">repos_url</code>)</p>
+            </div>
+            <span id="repoCountBadge" class="repo-count-badge">5 Repos</span>
+          </div>
+
+          <div id="reposList" class="repos-grid">
+            <!-- Repos rendered dynamically by script.js -->
+          </div>
+        </section>
+      </div>
+
+    </main>
+
+    <!-- ==================== MODE 2: BATTLE MODE (PHASE 3) ==================== -->
+    <section id="battleModeSection" class="battle-section hidden">
+      
+      <div class="battle-intro">
+        <div class="battle-badge">PHASE 3: BATTLE MODE</div>
+        <h2 class="battle-title">GitHub Developer Showdown</h2>
+        <p class="battle-desc">
+          Compare two GitHub developers simultaneously using <code class="code-tag">Promise.all()</code>. Calculates and reduces Total Stars (<code class="code-tag">stargazers_count</code>) across repositories to crown the winner!
+        </p>
+      </div>
+
+      <!-- Battle Input Form -->
+      <form id="battleForm" class="battle-form">
+        <div class="battle-inputs-row">
+          
+          <div class="battle-input-group">
+            <label for="battleUser1Input" class="battle-label">
+              <span class="player-dot player-1"></span> Challenger 1
+            </label>
+            <div class="input-with-icon">
+              <input 
+                type="text" 
+                id="battleUser1Input" 
+                placeholder="e.g. octocat" 
+                value="octocat" 
+                required 
+                autocomplete="off"
+              >
+            </div>
+          </div>
+
+          <div class="vs-divider">
+            <span>VS</span>
+          </div>
+
+          <div class="battle-input-group">
+            <label for="battleUser2Input" class="battle-label">
+              <span class="player-dot player-2"></span> Challenger 2
+            </label>
+            <div class="input-with-icon">
+              <input 
+                type="text" 
+                id="battleUser2Input" 
+                placeholder="e.g. torvalds" 
+                value="torvalds" 
+                required 
+                autocomplete="off"
+              >
+            </div>
+          </div>
+
+        </div>
+
+        <div class="battle-action-row">
+          <button type="submit" id="startBattleBtn" class="btn battle-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            Launch Showdown
+          </button>
+        </div>
+      </form>
+
+      <!-- Battle Loading State -->
+      <div id="battleLoading" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p class="loading-title">Executing Dual API Queries...</p>
+        <p class="loading-subtitle">Resolving <code class="code-tag">Promise.all()</code> and calculating total stargazers</p>
+      </div>
+
+      <!-- Battle Error State -->
+      <div id="battleError" class="error-state hidden">
+        <div class="error-card">
+          <h3 id="battleErrorTitle" class="error-heading">Showdown Error</h3>
+          <p id="battleErrorDesc" class="error-message">One or both users could not be found.</p>
+        </div>
+      </div>
+
+      <!-- Battle Arena Results -->
+      <div id="battleResults" class="battle-results hidden">
+        
+        <!-- Scoreboard Announcement -->
+        <div id="battleAnnouncement" class="battle-announcement">
+          <!-- Dynamically populated announcement -->
+        </div>
+
+        <div id="battleCardsContainer" class="battle-cards-container">
+          <!-- Dynamically populated by script.js -->
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- App Footer -->
+    <footer class="app-footer">
+      <p>Prodesk IT Internship — Sprint 3: The API Hunter ("Dev-Detective")</p>
+      <p class="footer-sub">Engineered with Native Fetch API, Async/Await, and Promise.all()</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
