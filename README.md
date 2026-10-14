@@ -15,7 +15,7 @@ css for styling dark and light mode and responsive layout
 vanilla javascript fetch api and async await for http requests
 promises and promise all for handling asynchronous data
 dom manipulation for creating cards and rendering live data
-localstorage for saving dark light theme and optional api token
+localstorage for saving dark light theme
 
 
 ## features i added
@@ -36,13 +36,12 @@ total stars calculation by reducing stargazers count across repositories array
 conditional winner and loser card rendering with green border and winner badge for winner and red border for runner up
 dark mode and light mode toggle with localstorage saving
 quick suggestion chips to instantly search popular accounts like octocat and torvalds
-optional github personal access token field in settings to prevent 60 request per hour rate limit
 
 
 ## project files
 
-index html has the search bar profile card repo list battle arena and modal
-style css has the colors dark mode light mode responsive layout and animations
+index html has the search bar profile card repo list and battle arena
+style css has the colors dark mode light mode responsive layout
 script js has all async await functions fetch logic promise all reduce and dom handling
 Prompts md has the prompts i used during development
 README md is this file

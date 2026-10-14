@@ -25,4 +25,4 @@ how to build phase 3 battle mode where user can enter two github usernames chall
 
 Prompt 6
 
-complete the battle mode logic by comparing total stars between both challengers and conditionally rendering the winner card with green indicator and winner badge and the runner up card with red indicator also tell me how to handle github api 60 requests per hour rate limit 403 error by adding an optional personal access token in request headers and test the dark light theme toggle so all code runs clean with zero errors in console
+complete the battle mode logic by comparing total stars between both challengers and conditionally rendering the winner card with green indicator and winner badge and the runner up card with red indicator also tell me how to handle github api 60 requests per hour rate limit 403 error gracefully and test the dark light theme toggle so all code runs clean with zero errors in console

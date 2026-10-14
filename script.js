@@ -1,5 +1,3 @@
-let githubToken = localStorage.getItem("dev_detective_token") || "";
-
 const searchModeBtn = document.getElementById("searchModeBtn");
   const battleModeBtn = document.getElementById("battleModeBtn");
 const singleSearchSection = document.getElementById("singleSearchSection");
@@ -8,13 +6,6 @@ const singleSearchSection = document.getElementById("singleSearchSection");
 const themeToggleBtn = document.getElementById("themeToggleBtn");
   const themeIcon = document.getElementById("themeIcon");
 const themeText = document.getElementById("themeText");
-
-const tokenToggleBtn = document.getElementById("tokenToggleBtn");
- const tokenBar = document.getElementById("tokenBar");
-const githubTokenInput = document.getElementById("githubTokenInput");
-  const saveTokenBtn = document.getElementById("saveTokenBtn");
-const clearTokenBtn = document.getElementById("clearTokenBtn");
- const tokenStatusMsg = document.getElementById("tokenStatusMsg");
 
 const searchForm = document.getElementById("searchForm");
   const usernameInput = document.getElementById("usernameInput");
@@ -74,18 +65,8 @@ function formatDate(isoDate) {
    return day + " " + month + " " + year;
 }
 
-function getHeaders() {
-   const headers = { "Accept": "application/vnd.github.v3+json" };
-   if (githubToken && githubToken.trim() !== "") {
-      headers["Authorization"] = "token " + githubToken.trim();
-   }
-   return headers;
-}
-
 async function getUser(username) {
-   const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()), {
-      headers: getHeaders()
-   });
+   const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()));
 
    if (!res.ok) {
       const err = new Error("Fetch error");
@@ -98,9 +79,7 @@ async function getUser(username) {
 
 async function getRepos(reposUrl) {
    try {
-      const res = await fetch(reposUrl + "?sort=updated&per_page=15", {
-         headers: getHeaders()
-      });
+      const res = await fetch(reposUrl + "?sort=updated&per_page=15");
       if (!res.ok) return [];
       return await res.json();
    } catch (e) {
@@ -243,7 +222,7 @@ async function searchUser(username) {
          searchErrorHint.textContent = "No results";
       } else if (err.status === 403) {
          errorTitle.textContent = "Rate Limit Reached";
-         errorDescription.textContent = "GitHub 60 requests/hr limit reached. Add a personal token in settings.";
+         errorDescription.textContent = "GitHub 60 requests/hr limit reached. Please wait a little.";
          searchErrorHint.textContent = "Rate limit";
       } else {
          errorTitle.textContent = "Error";
@@ -257,9 +236,7 @@ async function searchUser(username) {
 
 async function getAllRepos(username) {
    try {
-      const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()) + "/repos?per_page=100", {
-         headers: getHeaders()
-      });
+      const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()) + "/repos?per_page=100");
       if (!res.ok) return [];
       return await res.json();
    } catch (e) {
@@ -417,34 +394,6 @@ function initTheme() {
    setTheme(saved);
 }
 
-function initToken() {
-   if (githubToken) {
-      githubTokenInput.value = githubToken;
-      tokenStatusMsg.textContent = "Token is active";
-      tokenStatusMsg.style.color = "#22c55e";
-   }
-}
-
-function saveToken() {
-   const val = githubTokenInput.value.trim();
-   if (val) {
-      githubToken = val;
-      localStorage.setItem("dev_detective_token", val);
-      tokenStatusMsg.textContent = "Token saved";
-      tokenStatusMsg.style.color = "#22c55e";
-   } else {
-      clearToken();
-   }
-}
-
-function clearToken() {
-   githubToken = "";
-   localStorage.removeItem("dev_detective_token");
-   githubTokenInput.value = "";
-   tokenStatusMsg.textContent = "Token cleared";
-   tokenStatusMsg.style.color = "#94a3b8";
-}
-
 function initListeners() {
    themeToggleBtn.addEventListener("click", function () {
       const cur = document.documentElement.getAttribute("data-theme") || "dark";
@@ -453,13 +402,6 @@ function initListeners() {
 
    searchModeBtn.addEventListener("click", function () { setMode("search"); });
    battleModeBtn.addEventListener("click", function () { setMode("battle"); });
-
-   tokenToggleBtn.addEventListener("click", function () {
-      tokenBar.classList.toggle("hidden");
-   });
-
-   saveTokenBtn.addEventListener("click", saveToken);
-   clearTokenBtn.addEventListener("click", clearToken);
 
    searchForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -490,7 +432,6 @@ function initListeners() {
 
 document.addEventListener("DOMContentLoaded", function () {
    initTheme();
-   initToken();
    initListeners();
    searchUser("octocat");
 });
