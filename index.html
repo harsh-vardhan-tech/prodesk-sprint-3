@@ -3,319 +3,194 @@
 <head>
   <meta charset ="UTF-8">
   <meta name ="viewport" content ="width=device-width, initial-scale=1.0">
-  <title>Dev-Detective | GitHub Profile Search</title>
+  <title>Dev-Detective | GitHub User Search</title>
+  <link rel ="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel ="stylesheet" href ="style.css">
-  <link rel ="preconnect" href ="https://fonts.googleapis.com">
-  <link rel ="preconnect" href ="https://fonts.gstatic.com" crossorigin>
-  <link href ="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel ="stylesheet">
 </head>
 <body>
-  <div class ="app-container">
-    
-    <header class ="app-header">
-      <div class ="logo-area">
-        <div class ="logo-icon">
-          <svg viewBox ="0 0 24 24" width ="28" height ="28" fill ="currentColor">
-            <path d ="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-        </div>
+
+  <div class ="container">
+
+    <div class ="top-bar">
+      <div class ="app-logo">
+        <i class ="fa-brands fa-github logo-icon"></i>
         <div>
-          <h1 class ="logo-title">Dev-Detective</h1>
-          <p class ="logo-tagline">GitHub Profile Search</p>
+          <h2>Dev-Detective</h2>
+          <p class ="sub-title">GitHub Profile Finder</p>
         </div>
       </div>
 
-      <div class ="header-controls">
-        <div class ="mode-switcher">
-          <button id ="searchModeBtn" class ="mode-tab active" type ="button">
-            <svg width ="16" height ="16" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-              <circle cx ="11" cy ="11" r ="8"></circle>
-              <line x1 ="21" y1 ="21" x2 ="16.65" y2 ="16.65"></line>
-            </svg>
-            Search
-          </button>
-          <button id ="battleModeBtn" class ="mode-tab" type ="button">
-            <svg width ="16" height ="16" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-              <polygon points ="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-            Battle Mode
-          </button>
+      <div class ="top-buttons">
+        <div class ="tab-group">
+          <button id ="searchModeBtn" class ="tab-btn active" type ="button">Search</button>
+          <button id ="battleModeBtn" class ="tab-btn" type ="button">Battle</button>
         </div>
 
-        <button id ="tokenToggleBtn" class ="icon-btn" title ="Settings" type ="button">
-          <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-            <circle cx ="12" cy ="12" r ="3"></circle>
-            <path d ="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-          </svg>
+        <button id ="tokenToggleBtn" class ="btn-token" title ="API Token" type ="button">
+          <i class ="fa-solid fa-key"></i>
         </button>
 
-        <button id ="themeToggleBtn" class ="theme-toggle" type ="button">
-          <span class ="theme-text">LIGHT</span>
-          <span class ="theme-icon">
-            <svg id ="sunIcon" class ="hidden" width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-              <circle cx ="12" cy ="12" r ="5"></circle>
-              <line x1 ="12" y1 ="1" x2 ="12" y2 ="3"></line>
-              <line x1 ="12" y1 ="21" x2 ="12" y2 ="23"></line>
-              <line x1 ="4.22" y1 ="4.22" x2 ="5.64" y2 ="5.64"></line>
-              <line x1 ="18.36" y1 ="18.36" x2 ="19.78" y2 ="19.78"></line>
-              <line x1 ="1" y1 ="12" x2 ="3" y2 ="12"></line>
-              <line x1 ="21" y1 ="12" x2 ="23" y2 ="12"></line>
-              <line x1 ="4.22" y1 ="19.78" x2 ="5.64" y2 ="18.36"></line>
-              <line x1 ="18.36" y1 ="5.64" x2 ="19.78" y2 ="4.22"></line>
-            </svg>
-            <svg id ="moonIcon" width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-              <path d ="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-          </span>
+        <button id ="themeToggleBtn" class ="btn-theme" type ="button">
+          <i id ="themeIcon" class ="fa-solid fa-sun"></i>
+          <span id ="themeText">Light</span>
         </button>
-      </div>
-    </header>
-
-    <div id ="tokenBar" class ="token-bar hidden">
-      <div class ="token-content">
-        <div class ="token-info">
-          Add GitHub Token (Optional to increase rate limit)
-        </div>
-        <div class ="token-input-row">
-          <input type ="password" id ="githubTokenInput" placeholder ="ghp_xxxx" autocomplete ="off">
-          <button id ="saveTokenBtn" class ="btn btn-sm">Save</button>
-          <button id ="clearTokenBtn" class ="btn btn-sm btn-ghost">Clear</button>
-        </div>
-        <p id ="tokenStatusMsg" class ="token-status"></p>
       </div>
     </div>
 
-    <main id ="singleSearchSection" class ="active-section">
+    <div id ="tokenBar" class ="token-box hidden">
+      <p>Optional: Add personal token if you hit 60 requests/hr rate limit</p>
+      <div class ="token-row">
+        <input type ="password" id ="githubTokenInput" placeholder ="ghp_your_token_here">
+        <button id ="saveTokenBtn" class ="btn-small">Save</button>
+        <button id ="clearTokenBtn" class ="btn-small btn-secondary">Clear</button>
+      </div>
+      <span id ="tokenStatusMsg" class ="token-msg"></span>
+    </div>
+
+    <div id ="singleSearchSection">
       
-      <form id ="searchForm" class ="search-bar" role ="search">
-        <div class ="search-icon">
-          <svg width ="22" height ="22" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-            <circle cx ="11" cy ="11" r ="8"></circle>
-            <line x1 ="21" y1 ="21" x2 ="16.65" y2 ="16.65"></line>
-          </svg>
-        </div>
+      <form id ="searchForm" class ="search-box">
+        <i class ="fa-solid fa-magnifying-glass search-ico"></i>
         <input 
           type ="text" 
           id ="usernameInput" 
-          placeholder ="Search GitHub username..." 
-          autocomplete ="off" 
-          spellcheck ="false" 
-          required
+          placeholder ="Enter github username (e.g. octocat)..." 
+          required 
+          autocomplete ="off"
         >
-        <span id ="searchErrorHint" class ="search-error-text hidden">No results</span>
-        <button type ="submit" id ="searchBtn" class ="btn search-btn">
-          <span class ="btn-text">Search</span>
-        </button>
+        <span id ="searchErrorHint" class ="error-hint hidden">No results</span>
+        <button type ="submit" id ="searchBtn" class ="btn-search">Search</button>
       </form>
 
-      <div class ="quick-chips">
-        <span class ="chips-label">Try:</span>
-        <button type ="button" class ="chip-btn" data-user ="octocat">octocat</button>
-        <button type ="button" class ="chip-btn" data-user ="torvalds">torvalds</button>
-        <button type ="button" class ="chip-btn" data-user ="gaearon">gaearon</button>
-        <button type ="button" class ="chip-btn" data-user ="harsh-vardhan-tech">harsh-vardhan-tech</button>
+      <div class ="chips-box">
+        <span>Try:</span>
+        <button type ="button" class ="chip" data-user ="octocat">octocat</button>
+        <button type ="button" class ="chip" data-user ="torvalds">torvalds</button>
+        <button type ="button" class ="chip" data-user ="gaearon">gaearon</button>
+        <button type ="button" class ="chip" data-user ="harsh-vardhan-tech">harsh-vardhan-tech</button>
       </div>
 
-      <div id ="loadingIndicator" class ="loading-state hidden">
-        <div class ="spinner"></div>
-        <p class ="loading-title">Searching...</p>
+      <div id ="loadingIndicator" class ="loader-box hidden">
+        <div class ="spin-loader"></div>
+        <p>Loading user data...</p>
       </div>
 
-      <div id ="errorState" class ="error-state hidden">
-        <div class ="error-card">
-          <div class ="error-illustration">
-            <svg width ="64" height ="64" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="1.8">
-              <circle cx ="12" cy ="12" r ="10"></circle>
-              <line x1 ="12" y1 ="8" x2 ="12" y2 ="12"></line>
-              <line x1 ="12" y1 ="16" x2 ="12.01" y2 ="16"></line>
-            </svg>
-          </div>
-          <h2 id ="errorTitle" class ="error-heading">User Not Found</h2>
-          <p id ="errorDescription" class ="error-message">
-            No user found with this username. Please try again.
-          </p>
-          <div class ="error-actions">
-            <button id ="errorRetryBtn" class ="btn btn-sm" type ="button">Try octocat</button>
-          </div>
-        </div>
+      <div id ="errorState" class ="error-box hidden">
+        <i class ="fa-solid fa-circle-exclamation error-big-icon"></i>
+        <h3 id ="errorTitle">User Not Found</h3>
+        <p id ="errorDescription">No github profile matches this username. Check spelling and search again.</p>
+        <button id ="errorRetryBtn" type ="button" class ="btn-small">Search octocat</button>
       </div>
 
-      <div id ="profileContainer" class ="profile-container">
-        <article id ="profileCard" class ="profile-card">
-          
-          <div class ="profile-header">
-            <img id ="userAvatar" class ="user-avatar" src ="https://avatars.githubusercontent.com/u/583231?v=4" alt ="User avatar">
-            <div class ="profile-identity">
-              <div class ="name-row">
-                <h2 id ="userName" class ="user-name">The Octocat</h2>
-                <span id ="userJoined" class ="user-joined">Joined 25 Jan 2011</span>
+      <div id ="profileContainer">
+        
+        <div id ="profileCard" class ="user-card">
+          <div class ="card-header">
+            <img id ="userAvatar" class ="avatar-img" src ="https://avatars.githubusercontent.com/u/583231?v=4" alt ="Avatar">
+            <div class ="header-details">
+              <div class ="name-date">
+                <h2 id ="userName">The Octocat</h2>
+                <span id ="userJoined" class ="date-text">Joined 25 Jan 2011</span>
               </div>
-              <a id ="userLoginLink" class ="user-handle" href ="https://github.com/octocat" target ="_blank" rel ="noopener noreferrer">@octocat</a>
+              <a id ="userLoginLink" class ="user-handle" href ="https://github.com/octocat" target ="_blank">@octocat</a>
               <p id ="userBio" class ="user-bio">This profile has no bio</p>
             </div>
           </div>
 
-          <div class ="stats-box">
-            <div class ="stat-item">
-              <span class ="stat-label">Repos</span>
-              <span id ="statRepos" class ="stat-value">8</span>
+          <div class ="stats-row">
+            <div class ="stat-box">
+              <span class ="stat-name">Repos</span>
+              <span id ="statRepos" class ="stat-number">8</span>
             </div>
-            <div class ="stat-item">
-              <span class ="stat-label">Followers</span>
-              <span id ="statFollowers" class ="stat-value">9800</span>
+            <div class ="stat-box">
+              <span class ="stat-name">Followers</span>
+              <span id ="statFollowers" class ="stat-number">9800</span>
             </div>
-            <div class ="stat-item">
-              <span class ="stat-label">Following</span>
-              <span id ="statFollowing" class ="stat-value">9</span>
-            </div>
-          </div>
-
-          <div class ="meta-grid">
-            
-            <div id ="metaLocationWrapper" class ="meta-item">
-              <span class ="meta-icon">
-                <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-                  <path d ="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx ="12" cy ="10" r ="3"></circle>
-                </svg>
-              </span>
-              <span id ="metaLocation" class ="meta-text">San Francisco</span>
-            </div>
-
-            <div id ="metaBlogWrapper" class ="meta-item">
-              <span class ="meta-icon">
-                <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-                  <path d ="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                  <path d ="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                </svg>
-              </span>
-              <a id ="metaBlog" class ="meta-link" href ="https://github.blog" target ="_blank" rel ="noopener noreferrer">https://github.blog</a>
-            </div>
-
-            <div id ="metaTwitterWrapper" class ="meta-item">
-              <span class ="meta-icon">
-                <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-                  <path d ="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                </svg>
-              </span>
-              <a id ="metaTwitter" class ="meta-link" href ="#" target ="_blank" rel ="noopener noreferrer">Not Available</a>
-            </div>
-
-            <div id ="metaCompanyWrapper" class ="meta-item">
-              <span class ="meta-icon">
-                <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-                  <rect x ="2" y ="7" width ="20" height ="14" rx ="2" ry ="2"></rect>
-                  <path d ="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                </svg>
-              </span>
-              <span id ="metaCompany" class ="meta-text">@github</span>
-            </div>
-
-          </div>
-
-        </article>
-
-        <section id ="reposSection" class ="repos-section">
-          <div class ="repos-header">
-            <div>
-              <h3 class ="repos-title">Latest Repositories</h3>
-              <p class ="repos-subtitle">Top 5 repos</p>
-            </div>
-            <span id ="repoCountBadge" class ="repo-count-badge">5 Repos</span>
-          </div>
-
-          <div id ="reposList" class ="repos-grid">
-          </div>
-        </section>
-      </div>
-
-    </main>
-
-    <section id ="battleModeSection" class ="battle-section hidden">
-      
-      <div class ="battle-intro">
-        <div class ="battle-badge">Battle Mode</div>
-        <h2 class ="battle-title">Developer Battle</h2>
-        <p class ="battle-desc">
-          Compare two developers and see who has more total stars
-        </p>
-      </div>
-
-      <form id ="battleForm" class ="battle-form">
-        <div class ="battle-inputs-row">
-          
-          <div class ="battle-input-group">
-            <label for ="battleUser1Input" class ="battle-label">
-              <span class ="player-dot player-1"></span> User 1
-            </label>
-            <div class ="input-with-icon">
-              <input 
-                type ="text" 
-                id ="battleUser1Input" 
-                placeholder ="username 1" 
-                value ="octocat" 
-                required 
-                autocomplete ="off"
-              >
+            <div class ="stat-box">
+              <span class ="stat-name">Following</span>
+              <span id ="statFollowing" class ="stat-number">9</span>
             </div>
           </div>
 
-          <div class ="vs-divider">
-            <span>VS</span>
-          </div>
-
-          <div class ="battle-input-group">
-            <label for ="battleUser2Input" class ="battle-label">
-              <span class ="player-dot player-2"></span> User 2
-            </label>
-            <div class ="input-with-icon">
-              <input 
-                type ="text" 
-                id ="battleUser2Input" 
-                placeholder ="username 2" 
-                value ="torvalds" 
-                required 
-                autocomplete ="off"
-              >
+          <div class ="info-grid">
+            <div id ="metaLocationWrapper" class ="info-item">
+              <i class ="fa-solid fa-location-dot"></i>
+              <span id ="metaLocation">San Francisco</span>
+            </div>
+            <div id ="metaBlogWrapper" class ="info-item">
+              <i class ="fa-solid fa-link"></i>
+              <a id ="metaBlog" href ="https://github.blog" target ="_blank">https://github.blog</a>
+            </div>
+            <div id ="metaTwitterWrapper" class ="info-item">
+              <i class ="fa-brands fa-twitter"></i>
+              <a id ="metaTwitter" href ="#" target ="_blank">Not Available</a>
+            </div>
+            <div id ="metaCompanyWrapper" class ="info-item">
+              <i class ="fa-solid fa-building"></i>
+              <span id ="metaCompany">@github</span>
             </div>
           </div>
-
         </div>
 
-        <div class ="battle-action-row">
-          <button type ="submit" id ="startBattleBtn" class ="btn battle-btn">
-            <svg width ="18" height ="18" viewBox ="0 0 24 24" fill ="none" stroke ="currentColor" stroke-width ="2">
-              <polygon points ="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
-            Start Battle
+        <div id ="reposSection" class ="repos-wrapper">
+          <div class ="repos-head">
+            <h3>Top 5 Repositories</h3>
+            <span id ="repoCountBadge" class ="badge-repo">5 Repos</span>
+          </div>
+          <div id ="reposList" class ="repos-list">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id ="battleModeSection" class ="hidden">
+      
+      <div class ="battle-heading">
+        <h3>GitHub Battle Arena</h3>
+        <p>Compare two developers based on total repository stars</p>
+      </div>
+
+      <form id ="battleForm" class ="battle-box">
+        <div class ="battle-inputs">
+          <div class ="input-field">
+            <label>Developer 1</label>
+            <input type ="text" id ="battleUser1Input" value ="octocat" placeholder ="username 1" required>
+          </div>
+          <div class ="vs-circle">VS</div>
+          <div class ="input-field">
+            <label>Developer 2</label>
+            <input type ="text" id ="battleUser2Input" value ="torvalds" placeholder ="username 2" required>
+          </div>
+        </div>
+        <div class ="battle-submit-row">
+          <button type ="submit" id ="startBattleBtn" class ="btn-battle">
+            <i class ="fa-solid fa-bolt"></i> Start Battle
           </button>
         </div>
       </form>
 
-      <div id ="battleLoading" class ="loading-state hidden">
-        <div class ="spinner"></div>
-        <p class ="loading-title">Loading battle...</p>
+      <div id ="battleLoading" class ="loader-box hidden">
+        <div class ="spin-loader"></div>
+        <p>Fetching both users and calculating stars...</p>
       </div>
 
-      <div id ="battleError" class ="error-state hidden">
-        <div class ="error-card">
-          <h3 id ="battleErrorTitle" class ="error-heading">Error</h3>
-          <p id ="battleErrorDesc" class ="error-message">Could not find users.</p>
-        </div>
+      <div id ="battleError" class ="error-box hidden">
+        <h3 id ="battleErrorTitle">Error</h3>
+        <p id ="battleErrorDesc">Could not fetch users. Please check usernames.</p>
       </div>
 
-      <div id ="battleResults" class ="battle-results hidden">
-        <div id ="battleAnnouncement" class ="battle-announcement">
-        </div>
-        <div id ="battleCardsContainer" class ="battle-cards-container">
-        </div>
+      <div id ="battleResults" class ="hidden">
+        <div id ="battleAnnouncement" class ="winner-banner"></div>
+        <div id ="battleCardsContainer" class ="battle-cards"></div>
       </div>
 
-    </section>
+    </div>
 
-    <footer class ="app-footer">
-      <p>Dev-Detective</p>
-    </footer>
+    <div class ="footer">
+      <p>Dev-Detective | Prodesk IT Sprint 3 Project</p>
+    </div>
 
   </div>
 

@@ -1,24 +1,25 @@
-const GITHUB_API_BASE = "https://api.github.com/users";
 let githubToken = localStorage.getItem("dev_detective_token") || "";
 
 const searchModeBtn = document.getElementById("searchModeBtn");
   const battleModeBtn = document.getElementById("battleModeBtn");
 const singleSearchSection = document.getElementById("singleSearchSection");
  const battleModeSection = document.getElementById("battleModeSection");
+
 const themeToggleBtn = document.getElementById("themeToggleBtn");
-  const sunIcon = document.getElementById("sunIcon");
-const moonIcon = document.getElementById("moonIcon");
- const tokenToggleBtn = document.getElementById("tokenToggleBtn");
-const tokenBar = document.getElementById("tokenBar");
-  const githubTokenInput = document.getElementById("githubTokenInput");
-const saveTokenBtn = document.getElementById("saveTokenBtn");
-  const clearTokenBtn = document.getElementById("clearTokenBtn");
-const tokenStatusMsg = document.getElementById("tokenStatusMsg");
+  const themeIcon = document.getElementById("themeIcon");
+const themeText = document.getElementById("themeText");
+
+const tokenToggleBtn = document.getElementById("tokenToggleBtn");
+ const tokenBar = document.getElementById("tokenBar");
+const githubTokenInput = document.getElementById("githubTokenInput");
+  const saveTokenBtn = document.getElementById("saveTokenBtn");
+const clearTokenBtn = document.getElementById("clearTokenBtn");
+ const tokenStatusMsg = document.getElementById("tokenStatusMsg");
 
 const searchForm = document.getElementById("searchForm");
- const usernameInput = document.getElementById("usernameInput");
+  const usernameInput = document.getElementById("usernameInput");
 const searchBtn = document.getElementById("searchBtn");
-  const searchErrorHint = document.getElementById("searchErrorHint");
+ const searchErrorHint = document.getElementById("searchErrorHint");
 const loadingIndicator = document.getElementById("loadingIndicator");
  const errorState = document.getElementById("errorState");
 const errorTitle = document.getElementById("errorTitle");
@@ -27,126 +28,88 @@ const errorRetryBtn = document.getElementById("errorRetryBtn");
  const profileContainer = document.getElementById("profileContainer");
 
 const userAvatar = document.getElementById("userAvatar");
- const userName = document.getElementById("userName");
+  const userName = document.getElementById("userName");
 const userLoginLink = document.getElementById("userLoginLink");
-  const userJoined = document.getElementById("userJoined");
+ const userJoined = document.getElementById("userJoined");
 const userBio = document.getElementById("userBio");
- const statRepos = document.getElementById("statRepos");
+  const statRepos = document.getElementById("statRepos");
 const statFollowers = document.getElementById("statFollowers");
-  const statFollowing = document.getElementById("statFollowing");
+ const statFollowing = document.getElementById("statFollowing");
+
 const metaLocation = document.getElementById("metaLocation");
- const metaLocationWrapper = document.getElementById("metaLocationWrapper");
+  const metaLocationWrapper = document.getElementById("metaLocationWrapper");
 const metaBlog = document.getElementById("metaBlog");
- const metaBlogWrapper = document.getElementById("metaBlogWrapper");
+  const metaBlogWrapper = document.getElementById("metaBlogWrapper");
 const metaTwitter = document.getElementById("metaTwitter");
- const metaTwitterWrapper = document.getElementById("metaTwitterWrapper");
+  const metaTwitterWrapper = document.getElementById("metaTwitterWrapper");
 const metaCompany = document.getElementById("metaCompany");
- const metaCompanyWrapper = document.getElementById("metaCompanyWrapper");
+  const metaCompanyWrapper = document.getElementById("metaCompanyWrapper");
+
 const reposList = document.getElementById("reposList");
   const repoCountBadge = document.getElementById("repoCountBadge");
-const quickChips = document.querySelectorAll(".chip-btn");
+const quickChips = document.querySelectorAll(".chip");
 
 const battleForm = document.getElementById("battleForm");
- const battleUser1Input = document.getElementById("battleUser1Input");
+  const battleUser1Input = document.getElementById("battleUser1Input");
 const battleUser2Input = document.getElementById("battleUser2Input");
- const startBattleBtn = document.getElementById("startBattleBtn");
+  const startBattleBtn = document.getElementById("startBattleBtn");
 const battleLoading = document.getElementById("battleLoading");
-  const battleError = document.getElementById("battleError");
+ const battleError = document.getElementById("battleError");
 const battleErrorTitle = document.getElementById("battleErrorTitle");
- const battleErrorDesc = document.getElementById("battleErrorDesc");
+  const battleErrorDesc = document.getElementById("battleErrorDesc");
 const battleResults = document.getElementById("battleResults");
-  const battleAnnouncement = document.getElementById("battleAnnouncement");
+ const battleAnnouncement = document.getElementById("battleAnnouncement");
 const battleCardsContainer = document.getElementById("battleCardsContainer");
 
-const LANGUAGE_COLORS = {
-   JavaScript: "#f1e05a",
- TypeScript: "#3178c6",
-   HTML: "#e34c26",
-   CSS: "#563d7c",
- Python: "#3572A5",
-   Java: "#b07219",
- "C++": "#f34b7d",
-   C: "#555555",
- "C#": "#178600",
-   PHP: "#4F5D95",
- Go: "#00ADD8",
-   Rust: "#dea584",
- Ruby: "#701516",
-   Swift: "#F05138",
- Kotlin: "#A97BFF",
-   Dart: "#00B4AB",
- Shell: "#89e051"
-};
+function formatDate(isoDate) {
+   if (!isoDate) return "N/A";
+   const d = new Date(isoDate);
+   if (isNaN(d.getTime())) return "N/A";
 
-function formatDate(isoString) {
-   if (!isoString) return "Not available";
- const date = new Date(isoString);
-   if (isNaN(date.getTime())) return "Invalid date";
+   const day = d.getDate();
+ const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+   const month = months[d.getMonth()];
+ const year = d.getFullYear();
 
- const day = date.getDate();
-   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
- const month = months[date.getMonth()];
-   const year = date.getFullYear();
-
- return day + " " + month + " " + year;
+   return day + " " + month + " " + year;
 }
 
-function getApiHeaders() {
-   const headers = {
-      "Accept": "application/vnd.github.v3+json"
-   };
+function getHeaders() {
+   const headers = { "Accept": "application/vnd.github.v3+json" };
    if (githubToken && githubToken.trim() !== "") {
       headers["Authorization"] = "token " + githubToken.trim();
    }
    return headers;
 }
 
-async function fetchUserProfile(username) {
-   const cleanUsername = username.trim();
- const url = GITHUB_API_BASE + "/" + encodeURIComponent(cleanUsername);
-
-   const response = await fetch(url, {
-      method: "GET",
-      headers: getApiHeaders()
+async function getUser(username) {
+   const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()), {
+      headers: getHeaders()
    });
 
-   if (!response.ok) {
-      if (response.status === 404) {
-         const err = new Error("User not found");
-         err.status = 404;
-         throw err;
-      } else if (response.status === 403) {
-         const err = new Error("API rate limit exceeded");
-         err.status = 403;
-         throw err;
-      } else {
-         const err = new Error("API error: " + response.status);
-         err.status = response.status;
-         throw err;
-      }
+   if (!res.ok) {
+      const err = new Error("Fetch error");
+      err.status = res.status;
+      throw err;
    }
 
-   return await response.json();
+   return await res.json();
 }
 
-async function fetchUserRepos(reposUrl) {
-   const url = reposUrl + "?sort=updated&per_page=15";
-
-   const response = await fetch(url, {
-      method: "GET",
-      headers: getApiHeaders()
-   });
-
-   if (!response.ok) {
+async function getRepos(reposUrl) {
+   try {
+      const res = await fetch(reposUrl + "?sort=updated&per_page=15", {
+         headers: getHeaders()
+      });
+      if (!res.ok) return [];
+      return await res.json();
+   } catch (e) {
       return [];
    }
-
-   return await response.json();
 }
 
-function renderProfile(user) {
- userAvatar.src = user.avatar_url || "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png";
-   userAvatar.alt = user.login;
+function showProfile(user) {
+   userAvatar.src = user.avatar_url || "https://avatars.githubusercontent.com/u/583231?v=4";
  userName.textContent = user.name || user.login;
    userLoginLink.textContent = "@" + user.login;
  userLoginLink.href = user.html_url;
@@ -154,134 +117,102 @@ function renderProfile(user) {
    userJoined.textContent = "Joined " + formatDate(user.created_at);
 
    if (user.bio && user.bio.trim() !== "") {
-    userBio.textContent = user.bio;
-      userBio.style.opacity = "1";
- } else {
-    userBio.textContent = "This profile has no bio";
-      userBio.style.opacity = "0.7";
+      userBio.textContent = user.bio;
+    userBio.style.opacity = "1";
+   } else {
+      userBio.textContent = "This profile has no bio";
+    userBio.style.opacity = "0.6";
    }
 
- statRepos.textContent = user.public_repos !== undefined ? user.public_repos.toLocaleString() : "0";
-   statFollowers.textContent = user.followers !== undefined ? user.followers.toLocaleString() : "0";
- statFollowing.textContent = user.following !== undefined ? user.following.toLocaleString() : "0";
+ statRepos.textContent = user.public_repos !== undefined ? user.public_repos : "0";
+   statFollowers.textContent = user.followers !== undefined ? user.followers : "0";
+ statFollowing.textContent = user.following !== undefined ? user.following : "0";
 
    if (user.location) {
     metaLocation.textContent = user.location;
-      metaLocationWrapper.classList.remove("unavailable");
+      metaLocationWrapper.style.opacity = "1";
  } else {
     metaLocation.textContent = "Not Available";
-      metaLocationWrapper.classList.add("unavailable");
+      metaLocationWrapper.style.opacity = "0.5";
    }
 
    if (user.blog && user.blog.trim() !== "") {
-      let cleanUrl = user.blog.trim();
-      if (!cleanUrl.startsWith("http://") && !cleanUrl.startsWith("https://")) {
-         cleanUrl = "https://" + cleanUrl;
+      let url = user.blog.trim();
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+         url = "https://" + url;
       }
     metaBlog.textContent = user.blog;
-      metaBlog.href = cleanUrl;
-    metaBlogWrapper.classList.remove("unavailable");
+      metaBlog.href = url;
+    metaBlogWrapper.style.opacity = "1";
  } else {
     metaBlog.textContent = "Not Available";
       metaBlog.removeAttribute("href");
-    metaBlogWrapper.classList.add("unavailable");
+    metaBlogWrapper.style.opacity = "0.5";
    }
 
    if (user.twitter_username) {
     metaTwitter.textContent = "@" + user.twitter_username;
       metaTwitter.href = "https://twitter.com/" + user.twitter_username;
-    metaTwitterWrapper.classList.remove("unavailable");
+    metaTwitterWrapper.style.opacity = "1";
  } else {
     metaTwitter.textContent = "Not Available";
       metaTwitter.removeAttribute("href");
-    metaTwitterWrapper.classList.add("unavailable");
+    metaTwitterWrapper.style.opacity = "0.5";
    }
 
    if (user.company) {
     metaCompany.textContent = user.company;
-      metaCompanyWrapper.classList.remove("unavailable");
+      metaCompanyWrapper.style.opacity = "1";
  } else {
     metaCompany.textContent = "Not Available";
-      metaCompanyWrapper.classList.add("unavailable");
+      metaCompanyWrapper.style.opacity = "0.5";
    }
 }
 
-function renderRepositories(repos) {
+function showRepos(repos) {
    reposList.innerHTML = "";
 
    if (!repos || repos.length === 0) {
-      reposList.innerHTML = '<div class="repo-empty-state"><p>No public repositories found.</p></div>';
+      reposList.innerHTML = '<p style="color:var(--text-dim); text-align:center;">No public repositories found.</p>';
       repoCountBadge.textContent = "0 Repos";
       return;
    }
 
- const top5Repos = repos.slice(0, 5);
-   repoCountBadge.textContent = top5Repos.length + " Repos";
+ const top5 = repos.slice(0, 5);
+   repoCountBadge.textContent = top5.length + " Repos";
 
- top5Repos.forEach(function (repo) {
-      const card = document.createElement("article");
-      card.className = "repo-card";
+ top5.forEach(function (repo) {
+      const item = document.createElement("div");
+      item.className = "repo-item";
 
-      const langColor = LANGUAGE_COLORS[repo.language] || "#8b949e";
-      const langDisplay = repo.language ? repo.language : "General";
-      const descriptionText = repo.description ? repo.description : "No description provided.";
-      const updatedFormatted = formatDate(repo.updated_at);
+      const desc = repo.description ? repo.description : "No description.";
+      const dateStr = formatDate(repo.updated_at);
+      const lang = repo.language || "General";
 
-      card.innerHTML = `
-        <div class="repo-top">
-          <a class="repo-name-link" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            </svg>
-            ${repo.name}
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" y1="14" x2="21" y2="3"></line>
-            </svg>
+      item.innerHTML = `
+        <div class="repo-title-row">
+          <a class="repo-link" href="${repo.html_url}" target="_blank">
+            <i class="fa-solid fa-book-bookmark"></i> ${repo.name}
           </a>
-          <span class="repo-visibility">${repo.private ? "Private" : "Public"}</span>
+          <span class="repo-vis">${repo.private ? "Private" : "Public"}</span>
         </div>
-
-        <p class="repo-desc">${descriptionText}</p>
-
-        <div class="repo-meta">
-          <div class="repo-meta-item">
-            <span class="lang-dot" style="background-color: ${langColor};"></span>
-            <span>${langDisplay}</span>
-          </div>
-
-          <div class="repo-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-            <span>${repo.stargazers_count.toLocaleString()}</span>
-          </div>
-
-          <div class="repo-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="6" y1="3" x2="6" y2="15"></line>
-              <circle cx="18" cy="6" r="3"></circle>
-              <circle cx="6" cy="18" r="3"></circle>
-              <path d="M18 9a9 9 0 0 1-9 9"></path>
-            </svg>
-            <span>${repo.forks_count.toLocaleString()}</span>
-          </div>
-
-          <div class="repo-meta-item">
-            <span>Updated ${updatedFormatted}</span>
-          </div>
+        <p class="repo-desc">${desc}</p>
+        <div class="repo-footer">
+          <span><i class="fa-solid fa-code"></i> ${lang}</span>
+          <span><i class="fa-solid fa-star"></i> ${repo.stargazers_count}</span>
+          <span><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</span>
+          <span>Updated ${dateStr}</span>
         </div>
       `;
 
-      reposList.appendChild(card);
+      reposList.appendChild(item);
    });
 }
 
-async function handleUserSearch(username) {
+async function searchUser(username) {
    if (!username || username.trim() === "") return;
 
-   const targetUser = username.trim();
+   const cleanName = username.trim();
 
    searchErrorHint.classList.add("hidden");
    errorState.classList.add("hidden");
@@ -290,15 +221,14 @@ async function handleUserSearch(username) {
    searchBtn.disabled = true;
 
    try {
-      const userData = await fetchUserProfile(targetUser);
-      renderProfile(userData);
+      const userData = await getUser(cleanName);
+      showProfile(userData);
 
-      let reposData = [];
+      let repos = [];
       if (userData.repos_url) {
-         reposData = await fetchUserRepos(userData.repos_url);
+         repos = await getRepos(userData.repos_url);
       }
-
-      renderRepositories(reposData);
+      showRepos(repos);
 
       loadingIndicator.classList.add("hidden");
       profileContainer.classList.remove("hidden");
@@ -309,15 +239,15 @@ async function handleUserSearch(username) {
 
       if (err.status === 404) {
          errorTitle.textContent = "User Not Found";
-         errorDescription.textContent = 'No GitHub account found with username "' + targetUser + '".';
+         errorDescription.textContent = 'No user found for "' + cleanName + '". Please check spelling.';
          searchErrorHint.textContent = "No results";
       } else if (err.status === 403) {
-         errorTitle.textContent = "Rate Limit Exceeded";
-         errorDescription.textContent = "GitHub API limit reached. You can add a token in settings or wait.";
+         errorTitle.textContent = "Rate Limit Reached";
+         errorDescription.textContent = "GitHub 60 requests/hr limit reached. Add a personal token in settings.";
          searchErrorHint.textContent = "Rate limit";
       } else {
          errorTitle.textContent = "Error";
-         errorDescription.textContent = err.message || "Failed to load data.";
+         errorDescription.textContent = "Could not fetch user data. Check network connection.";
          searchErrorHint.textContent = "Error";
       }
    } finally {
@@ -325,110 +255,77 @@ async function handleUserSearch(username) {
    }
 }
 
-async function fetchAllReposForUser(username) {
+async function getAllRepos(username) {
    try {
-      const url = GITHUB_API_BASE + "/" + encodeURIComponent(username) + "/repos?per_page=100&sort=pushed";
-      const response = await fetch(url, {
-         method: "GET",
-         headers: getApiHeaders()
+      const res = await fetch("https://api.github.com/users/" + encodeURIComponent(username.trim()) + "/repos?per_page=100", {
+         headers: getHeaders()
       });
-      if (!response.ok) return [];
-      return await response.json();
+      if (!res.ok) return [];
+      return await res.json();
    } catch (e) {
-      return []; }
+      return [];
+   }
 }
 
-async function fetchFullChallengerBundle(username) {
-   const profile = await fetchUserProfile(username);
-   const repos = await fetchAllReposForUser(username);
+async function getBattleData(username) {
+   const user = await getUser(username);
+   const repos = await getAllRepos(username);
 
-   const totalStars = repos.reduce(function (sum, repo) {
-      return sum + (repo.stargazers_count || 0);
+   const totalStars = repos.reduce(function (total, r) {
+      return total + (r.stargazers_count || 0);
    }, 0);
 
-   let topRepo = null;
-   if (repos.length > 0) {
-      topRepo = repos.reduce(function (prev, curr) {
-         return curr.stargazers_count > prev.stargazers_count ? curr : prev;
-      }, repos[0]);
-   }
-
    return {
-      profile: profile,
-      repos: repos,
-      totalStars: totalStars,
-      topRepo: topRepo
+      user: user,
+      totalStars: totalStars
    };
 }
 
-function createChallengerCardHtml(challenger, statusClass, badgeText, badgeClass) {
-   const profile = challenger.profile;
-   const totalStars = challenger.totalStars;
-   const topRepo = challenger.topRepo;
+function makeBattleCard(data, isWinner, isTie) {
+   const u = data.user;
+   const stars = data.totalStars;
 
-   const topRepoHtml = topRepo && topRepo.stargazers_count > 0 ? `
-     <div class="battle-top-repo">
-       <span>Top Repo: <strong>${topRepo.name}</strong> (${topRepo.stargazers_count.toLocaleString()} ★)</span>
-     </div>
-   ` : `
-     <div class="battle-top-repo">
-       <span>Top Repo: None</span>
-     </div>
-   `;
+   let cardClass = "";
+   let badgeHtml = "";
+
+   if (isTie) {
+      cardClass = "";
+      badgeHtml = '<span class="badge-status" style="background:#f59e0b; color:#fff;">TIE</span>';
+   } else if (isWinner) {
+      cardClass = "winner";
+      badgeHtml = '<span class="badge-status win">🏆 WINNER</span>';
+   } else {
+      cardClass = "loser";
+      badgeHtml = '<span class="badge-status lose">RUNNER UP</span>';
+   }
 
    return `
-     <div class="battle-card ${statusClass}">
-       <span class="battle-status-badge ${badgeClass}">${badgeText}</span>
-       
-       <div class="battle-user-info">
-         <img class="battle-avatar" src="${profile.avatar_url}" alt="${profile.login}">
-         <h3 class="battle-user-name">${profile.name || profile.login}</h3>
-         <a class="battle-user-handle" href="${profile.html_url}" target="_blank" rel="noopener noreferrer">@${profile.login}</a>
-       </div>
+     <div class="battle-card ${cardClass}">
+       ${badgeHtml}
+       <img class="battle-avatar" src="${u.avatar_url}" alt="${u.login}">
+       <h4 class="battle-name">${u.name || u.login}</h4>
+       <a class="battle-handle" href="${u.html_url}" target="_blank">@${u.login}</a>
 
-       <div class="battle-metrics">
-         <div class="metric-row">
-           <span class="metric-name">
-             <svg width="15" height="15" viewBox="0 0 24 24" fill="#fbbf24">
-               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-             </svg>
-             Total Stars
-           </span>
-           <span class="metric-val metric-highlight">${totalStars.toLocaleString()} ★</span>
+       <div class="battle-stats-box">
+         <div class="battle-stat-row">
+           <span>Total Stars:</span>
+           <span class="star-val">⭐ ${stars}</span>
          </div>
-
-         <div class="metric-row">
-           <span class="metric-name">
-             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-               <circle cx="9" cy="7" r="4"></circle>
-               <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-             </svg>
-             Followers
-           </span>
-           <span class="metric-val">${profile.followers.toLocaleString()}</span>
+         <div class="battle-stat-row">
+           <span>Followers:</span>
+           <span>${u.followers}</span>
          </div>
-
-         <div class="metric-row">
-           <span class="metric-name">
-             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-             </svg>
-             Public Repos
-           </span>
-           <span class="metric-val">${profile.public_repos.toLocaleString()}</span>
+         <div class="battle-stat-row">
+           <span>Public Repos:</span>
+           <span>${u.public_repos}</span>
          </div>
        </div>
-
-       ${topRepoHtml}
      </div>
    `;
 }
 
-async function handleBattleShowdown(user1, user2) {
-   if (!user1 || !user2) return;
+async function runBattle(u1, u2) {
+   if (!u1 || !u2) return;
 
    battleError.classList.add("hidden");
    battleResults.classList.add("hidden");
@@ -437,81 +334,39 @@ async function handleBattleShowdown(user1, user2) {
 
    try {
       const results = await Promise.all([
-         fetchFullChallengerBundle(user1),
-         fetchFullChallengerBundle(user2)
+         getBattleData(u1),
+         getBattleData(u2)
       ]);
 
-      const challenger1 = results[0];
-      const challenger2 = results[1];
+      const p1 = results[0];
+      const p2 = results[1];
 
-      const stars1 = challenger1.totalStars;
-      const stars2 = challenger2.totalStars;
+      let win1 = false;
+      let win2 = false;
+      let tie = false;
 
-      let announcementText = "";
-      let announcementSub = "";
-      let c1Status = "", c1Badge = "", c1BadgeClass = "";
-      let c2Status = "", c2Badge = "", c2BadgeClass = "";
-
-      if (stars1 > stars2) {
-         announcementText = "🏆 " + (challenger1.profile.name || challenger1.profile.login) + " Wins!";
-         announcementSub = "Winner has " + (stars1 - stars2).toLocaleString() + " more stars!";
-         c1Status = "is-winner";
-         c1Badge = "🏆 WINNER";
-         c1BadgeClass = "winner-badge";
-         c2Status = "is-loser";
-         c2Badge = "RUNNER UP";
-         c2BadgeClass = "loser-badge";
-      } else if (stars2 > stars1) {
-         announcementText = "🏆 " + (challenger2.profile.name || challenger2.profile.login) + " Wins!";
-         announcementSub = "Winner has " + (stars2 - stars1).toLocaleString() + " more stars!";
-         c2Status = "is-winner";
-         c2Badge = "🏆 WINNER";
-         c2BadgeClass = "winner-badge";
-         c1Status = "is-loser";
-         c1Badge = "RUNNER UP";
-         c1BadgeClass = "loser-badge";
+      if (p1.totalStars > p2.totalStars) {
+         win1 = true;
+         battleAnnouncement.innerHTML = '<span class="winner-text">🏆 ' + (p1.user.name || p1.user.login) + ' Wins!</span>';
+      } else if (p2.totalStars > p1.totalStars) {
+         win2 = true;
+         battleAnnouncement.innerHTML = '<span class="winner-text">🏆 ' + (p2.user.name || p2.user.login) + ' Wins!</span>';
       } else {
-         if (challenger1.profile.followers > challenger2.profile.followers) {
-            announcementText = "🏆 " + (challenger1.profile.name || challenger1.profile.login) + " Wins!";
-            announcementSub = "Tied on stars but won on followers!";
-            c1Status = "is-winner";
-            c1Badge = "🏆 WINNER";
-            c1BadgeClass = "winner-badge";
-            c2Status = "is-loser";
-            c2Badge = "RUNNER UP";
-            c2BadgeClass = "loser-badge";
-         } else if (challenger2.profile.followers > challenger1.profile.followers) {
-            announcementText = "🏆 " + (challenger2.profile.name || challenger2.profile.login) + " Wins!";
-            announcementSub = "Tied on stars but won on followers!";
-            c2Status = "is-winner";
-            c2Badge = "🏆 WINNER";
-            c2BadgeClass = "winner-badge";
-            c1Status = "is-loser";
-            c1Badge = "RUNNER UP";
-            c1BadgeClass = "loser-badge";
+         if (p1.user.followers > p2.user.followers) {
+            win1 = true;
+            battleAnnouncement.innerHTML = '<span class="winner-text">🏆 ' + (p1.user.name || p1.user.login) + ' Wins by followers!</span>';
+         } else if (p2.user.followers > p1.user.followers) {
+            win2 = true;
+            battleAnnouncement.innerHTML = '<span class="winner-text">🏆 ' + (p2.user.name || p2.user.login) + ' Wins by followers!</span>';
          } else {
-            announcementText = "Tie Match!";
-            announcementSub = "Both users have same stars and followers.";
-            c1Status = "is-tie";
-            c1Badge = "TIE";
-            c1BadgeClass = "tie-badge";
-            c2Status = "is-tie";
-            c2Badge = "TIE";
-            c2BadgeClass = "tie-badge";
+            tie = true;
+            battleAnnouncement.innerHTML = '<span class="winner-text" style="color:#f59e0b;">It is a Tie!</span>';
          }
       }
 
-      battleAnnouncement.innerHTML = `
-        <div class="announcement-winner-text ${c1Status === 'is-tie' ? 'tie' : ''}">${announcementText}</div>
-        <div class="announcement-sub">${announcementSub}</div>
-      `;
-
       battleCardsContainer.innerHTML = `
-        ${createChallengerCardHtml(challenger1, c1Status, c1Badge, c1BadgeClass)}
-        <div class="battle-vs-badge">
-          <span>VS</span>
-        </div>
-        ${createChallengerCardHtml(challenger2, c2Status, c2Badge, c2BadgeClass)}
+        ${makeBattleCard(p1, win1, tie)}
+        ${makeBattleCard(p2, win2, tie)}
       `;
 
       battleLoading.classList.add("hidden");
@@ -519,20 +374,19 @@ async function handleBattleShowdown(user1, user2) {
    } catch (err) {
       battleLoading.classList.add("hidden");
       battleError.classList.remove("hidden");
-
       if (err.status === 404) {
          battleErrorTitle.textContent = "User Not Found";
-         battleErrorDesc.textContent = "One or both users could not be found on GitHub.";
+         battleErrorDesc.textContent = "One or both users could not be found.";
       } else {
          battleErrorTitle.textContent = "Error";
-         battleErrorDesc.textContent = "Failed to run battle mode. Please check connection.";
+         battleErrorDesc.textContent = "Failed to run battle. Please try again.";
       }
    } finally {
       startBattleBtn.disabled = false;
    }
 }
 
-function switchMode(mode) {
+function setMode(mode) {
    if (mode === "search") {
     searchModeBtn.classList.add("active");
       battleModeBtn.classList.remove("active");
@@ -546,36 +400,28 @@ function switchMode(mode) {
    }
 }
 
-function initTheme() {
-   const savedTheme = localStorage.getItem("dev_detective_theme") || "dark";
-   applyTheme(savedTheme);
-}
-
-function applyTheme(theme) {
+function setTheme(theme) {
    document.documentElement.setAttribute("data-theme", theme);
-   const themeText = themeToggleBtn.querySelector(".theme-text");
    if (theme === "dark") {
-    themeText.textContent = "LIGHT";
-      sunIcon.classList.remove("hidden");
-    moonIcon.classList.add("hidden");
+      themeIcon.className = "fa-solid fa-sun";
+    themeText.textContent = "Light";
  } else {
-    themeText.textContent = "DARK";
-      sunIcon.classList.add("hidden");
-    moonIcon.classList.remove("hidden");
+      themeIcon.className = "fa-solid fa-moon";
+    themeText.textContent = "Dark";
    }
    localStorage.setItem("dev_detective_theme", theme);
 }
 
-function toggleTheme() {
-   const current = document.documentElement.getAttribute("data-theme") || "dark";
-   applyTheme(current === "dark" ? "light" : "dark");
+function initTheme() {
+   const saved = localStorage.getItem("dev_detective_theme") || "dark";
+   setTheme(saved);
 }
 
 function initToken() {
    if (githubToken) {
       githubTokenInput.value = githubToken;
-      tokenStatusMsg.textContent = "Token saved";
-      tokenStatusMsg.className = "token-status success";
+      tokenStatusMsg.textContent = "Token is active";
+      tokenStatusMsg.style.color = "#22c55e";
    }
 }
 
@@ -585,7 +431,7 @@ function saveToken() {
       githubToken = val;
       localStorage.setItem("dev_detective_token", val);
       tokenStatusMsg.textContent = "Token saved";
-      tokenStatusMsg.className = "token-status success";
+      tokenStatusMsg.style.color = "#22c55e";
    } else {
       clearToken();
    }
@@ -596,39 +442,41 @@ function clearToken() {
    localStorage.removeItem("dev_detective_token");
    githubTokenInput.value = "";
    tokenStatusMsg.textContent = "Token cleared";
-   tokenStatusMsg.className = "token-status info";
+   tokenStatusMsg.style.color = "#94a3b8";
 }
 
-function initEvents() {
-   themeToggleBtn.addEventListener("click", toggleTheme);
+function initListeners() {
+   themeToggleBtn.addEventListener("click", function () {
+      const cur = document.documentElement.getAttribute("data-theme") || "dark";
+      setTheme(cur === "dark" ? "light" : "dark");
+   });
 
-   searchModeBtn.addEventListener("click", function () { switchMode("search"); });
-   battleModeBtn.addEventListener("click", function () { switchMode("battle"); });
+   searchModeBtn.addEventListener("click", function () { setMode("search"); });
+   battleModeBtn.addEventListener("click", function () { setMode("battle"); });
 
    tokenToggleBtn.addEventListener("click", function () {
       tokenBar.classList.toggle("hidden");
    });
+
    saveTokenBtn.addEventListener("click", saveToken);
    clearTokenBtn.addEventListener("click", clearToken);
 
    searchForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const query = usernameInput.value.trim();
-      if (query) {
-         handleUserSearch(query);
-      }
+      const val = usernameInput.value.trim();
+      if (val) searchUser(val);
    });
 
    errorRetryBtn.addEventListener("click", function () {
       usernameInput.value = "octocat";
-      handleUserSearch("octocat");
+      searchUser("octocat");
    });
 
    quickChips.forEach(function (chip) {
       chip.addEventListener("click", function () {
-         const user = chip.getAttribute("data-user");
-         usernameInput.value = user;
-         handleUserSearch(user);
+         const u = chip.getAttribute("data-user");
+         usernameInput.value = u;
+         searchUser(u);
       });
    });
 
@@ -636,15 +484,13 @@ function initEvents() {
       e.preventDefault();
       const u1 = battleUser1Input.value.trim();
       const u2 = battleUser2Input.value.trim();
-      if (u1 && u2) {
-         handleBattleShowdown(u1, u2);
-      }
+      if (u1 && u2) runBattle(u1, u2);
    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
    initTheme();
    initToken();
-   initEvents();
-   handleUserSearch("octocat");
+   initListeners();
+   searchUser("octocat");
 });
