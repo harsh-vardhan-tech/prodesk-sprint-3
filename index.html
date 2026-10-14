@@ -2,62 +2,43 @@
 <html lang ="en" data-theme ="dark">
 <head>
   <meta charset ="UTF-8">
-  <meta name ="viewport" content ="width=device-width, initial-scale=1.0">
-  <title>Dev-Detective | GitHub User Search</title>
+<meta name ="viewport" content ="width=device-width, initial-scale=1.0" >
+<title>Dev-Detective | GitHub User Search</title>
   <link rel ="stylesheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel ="stylesheet" href ="style.css">
-</head>
-<body>
-
+<link rel =  "stylesheet" href ="style.css">
+</head> <body>
   <div class ="container">
-
     <div class ="top-bar">
-      <div class ="app-logo">
-        <i class ="fa-brands fa-github logo-icon"></i>
+      <div class ="app-logo"> <i class ="fa-brands fa-github logo-icon"></i>
         <div>
           <h2>Dev-Detective</h2>
           <p class ="sub-title">GitHub Profile Search</p>
         </div>
       </div>
-
-      <div class ="top-buttons">
+      <div class  ="top-buttons">
         <div class ="tab-group">
-          <button id ="searchModeBtn" class ="tab-btn active" type ="button">Search</button>
-          <button id ="battleModeBtn" class ="tab-btn" type ="button">Battle</button>
+          <button id ="searchModeBtn" class ="tab-btn active" type ="button">Search</button> <button id ="battleModeBtn" class ="tab-btn" type ="button">Battle</button>
         </div>
-
         <button id ="themeToggleBtn" class ="btn-theme" type ="button">
-          <i id ="themeIcon" class ="fa-solid fa-sun"></i>
-          <span id ="themeText">Light</span>
+          <i id ="themeIcon" class ="fa-solid fa-sun"></i> <span id ="themeText">Light</span>
         </button>
       </div>
     </div>
 
     <div id ="singleSearchSection">
-      
       <form id ="searchForm" class ="search-box">
         <i class ="fa-solid fa-magnifying-glass search-ico"></i>
-        <input 
-          type ="text" 
-          id ="usernameInput" 
-          placeholder ="Enter github username (e.g. octocat)..." 
-          required 
-          autocomplete ="off"
-        >
+        <input type ="text" id ="usernameInput" placeholder ="Enter github username (e.g. octocat)..." required autocomplete ="off">
         <span id ="searchErrorHint" class ="error-hint hidden">No results</span>
         <button type ="submit" id ="searchBtn" class ="btn-search">Search</button>
       </form>
-
       <div class ="chips-box">
-        <span>Try:</span>
-        <button type ="button" class ="chip" data-user ="harsh-vardhan-tech">harsh-vardhan-tech</button>
-        <button type ="button" class ="chip" data-user ="kunal-kushwaha">kunal-kushwaha</button>
-        <button type ="button" class ="chip" data-user ="octocat">octocat</button>
+        <span>Try:</span> <button type ="button" class ="chip" data-user ="harsh-vardhan-tech">harsh-vardhan-tech</button>
+        <button type ="button" class ="chip" data-user ="kunal-kushwaha">kunal-kushwaha</button> <button type ="button" class ="chip" data-user ="octocat">octocat</button>
       </div>
 
       <div id ="loadingIndicator" class ="loader-box hidden">
-        <div class ="spin-loader"></div>
-        <p>Loading user data...</p>
+        <div class ="spin-loader"></div> <p>Loading user data...</p>
       </div>
 
       <div id ="errorState" class ="error-box hidden">
@@ -68,14 +49,12 @@
       </div>
 
       <div id ="profileContainer">
-        
         <div id ="profileCard" class ="user-card">
           <div class ="card-header">
             <img id ="userAvatar" class ="avatar-img" src ="https://avatars.githubusercontent.com/u/583231?v=4" alt ="Avatar">
             <div class ="header-details">
               <div class ="name-date">
-                <h2 id ="userName">The Octocat</h2>
-                <span id ="userJoined" class ="date-text">Joined 25 Jan 2011</span>
+                <h2 id ="userName">The Octocat</h2> <span id ="userJoined" class ="date-text">Joined 25 Jan 2011</span>
               </div>
               <a id ="userLoginLink" class ="user-handle" href ="https://github.com/octocat" target ="_blank">@octocat</a>
               <p id ="userBio" class ="user-bio">This profile has no bio</p>
@@ -83,55 +62,29 @@
           </div>
 
           <div class ="stats-row">
-            <div class ="stat-box">
-              <span class ="stat-name">Repos</span>
-              <span id ="statRepos" class ="stat-number">8</span>
-            </div>
-            <div class ="stat-box">
-              <span class ="stat-name">Followers</span>
-              <span id ="statFollowers" class ="stat-number">9800</span>
-            </div>
-            <div class ="stat-box">
-              <span class ="stat-name">Following</span>
-              <span id ="statFollowing" class ="stat-number">9</span>
-            </div>
+            <div class ="stat-box"> <span class ="stat-name">Repos</span> <span id ="statRepos" class ="stat-number">8</span> </div>
+            <div class ="stat-box"> <span class ="stat-name">Followers</span> <span id ="statFollowers" class ="stat-number">9800</span> </div>
+            <div class ="stat-box"> <span class ="stat-name">Following</span> <span id ="statFollowing" class ="stat-number">9</span> </div>
           </div>
 
           <div class ="info-grid">
-            <div id ="metaLocationWrapper" class ="info-item">
-              <i class ="fa-solid fa-location-dot"></i>
-              <span id ="metaLocation">San Francisco</span>
-            </div>
-            <div id ="metaBlogWrapper" class ="info-item">
-              <i class ="fa-solid fa-link"></i>
-              <a id ="metaBlog" href ="https://github.blog" target ="_blank">https://github.blog</a>
-            </div>
-            <div id ="metaTwitterWrapper" class ="info-item">
-              <i class ="fa-brands fa-twitter"></i>
-              <a id ="metaTwitter" href ="#" target ="_blank">Not Available</a>
-            </div>
-            <div id ="metaCompanyWrapper" class ="info-item">
-              <i class ="fa-solid fa-building"></i>
-              <span id ="metaCompany">@github</span>
-            </div>
+            <div id ="metaLocationWrapper" class ="info-item"> <i class ="fa-solid fa-location-dot"></i> <span id ="metaLocation">San Francisco</span> </div>
+            <div id ="metaBlogWrapper" class ="info-item"> <i class ="fa-solid fa-link"></i> <a id ="metaBlog" href ="https://github.blog" target ="_blank">https://github.blog</a> </div>
+            <div id ="metaTwitterWrapper" class ="info-item"> <i class ="fa-brands fa-twitter"></i> <a id ="metaTwitter" href ="#" target ="_blank">Not Available</a> </div>
+            <div id ="metaCompanyWrapper" class ="info-item"> <i class ="fa-solid fa-building"></i> <span id ="metaCompany">@github</span> </div>
           </div>
         </div>
 
         <div id ="reposSection" class ="repos-wrapper">
           <div class ="repos-head">
-            <h3>Top 5 Repositories</h3>
-            <span id ="repoCountBadge" class ="badge-repo">5 Repos</span>
+            <h3>Top 5 Repositories</h3> <span id ="repoCountBadge" class ="badge-repo">5 Repos</span>
           </div>
-          <div id ="reposList" class ="repos-list">
-          </div>
+          <div id ="reposList" class ="repos-list"> </div>
         </div>
-
       </div>
-
     </div>
 
     <div id ="battleModeSection" class ="hidden">
-      
       <div class ="battle-heading">
         <h3>GitHub Battle Arena</h3>
         <p>Compare two developers based on total repository stars</p>
@@ -140,43 +93,33 @@
       <form id ="battleForm" class ="battle-box">
         <div class ="battle-inputs">
           <div class ="input-field">
-            <label>Developer 1</label>
-            <input type ="text" id ="battleUser1Input" value ="harsh-vardhan-tech" placeholder ="username 1" required>
+            <label>Developer 1</label> <input type ="text" id ="battleUser1Input" value ="harsh-vardhan-tech" placeholder ="username 1" required>
           </div>
           <div class ="vs-circle">VS</div>
           <div class ="input-field">
-            <label>Developer 2</label>
-            <input type ="text" id ="battleUser2Input" value ="kunal-kushwaha" placeholder ="username 2" required>
+            <label>Developer 2</label> <input type ="text" id ="battleUser2Input" value ="kunal-kushwaha" placeholder ="username 2" required>
           </div>
         </div>
         <div class ="battle-submit-row">
-          <button type ="submit" id ="startBattleBtn" class ="btn-battle">
-            <i class ="fa-solid fa-bolt"></i> Start Battle
-          </button>
+          <button type ="submit" id ="startBattleBtn" class ="btn-battle"> <i class ="fa-solid fa-bolt"></i> Start Battle </button>
         </div>
       </form>
 
       <div id ="battleLoading" class ="loader-box hidden">
-        <div class ="spin-loader"></div>
-        <p>Fetching both users and calculating stars...</p>
+        <div class ="spin-loader"></div> <p>Fetching both users and calculating stars...</p>
       </div>
 
       <div id ="battleError" class ="error-box hidden">
-        <h3 id ="battleErrorTitle">Error</h3>
-        <p id ="battleErrorDesc">Could not fetch users. Please check usernames.</p>
+        <h3 id ="battleErrorTitle">Error</h3> <p id ="battleErrorDesc">Could not fetch users. Please check usernames.</p>
       </div>
 
       <div id ="battleResults" class ="hidden">
         <div id ="battleAnnouncement" class ="winner-banner"></div>
         <div id ="battleCardsContainer" class ="battle-cards"></div>
       </div>
-
     </div>
 
-    <div class ="footer">
-      <p>Dev-Detective | Prodesk IT Sprint 3 Project</p>
-    </div>
-
+    <div class ="footer"> <p>Dev-Detective | Prodesk IT Sprint 3 Project</p> </div>
   </div>
 
   <script src ="script.js"></script>
