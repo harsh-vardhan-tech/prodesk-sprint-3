@@ -1,7 +1,4 @@
-/* Dev-Detective stylesheet */
-
 :root {
-  /* Dark Theme (Default) */
   --bg-body: #141d2f;
   --bg-card: #1e2a47;
   --bg-input: #1e2a47;
@@ -55,10 +52,8 @@
   --shadow-card: 0 16px 30px -10px rgba(70, 96, 187, 0.15);
 }
 
-/* Base Reset */
 * {
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
   box-sizing: border-box;
 }
 
@@ -67,8 +62,7 @@ body {
   background-color: var(--bg-body);
   color: var(--text-main);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  display: flex; justify-content: center;
   align-items: flex-start;
   padding: 2.5rem 1.25rem;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -83,7 +77,6 @@ body {
   gap: 1.75rem;
 }
 
-/* Helpers */
 .hidden {
   display: none !important;
 }
@@ -98,11 +91,9 @@ body {
   border: 1px solid var(--border-color);
 }
 
-/* Buttons */
 .btn {
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.95rem; font-weight: 700;
   color: #ffffff;
   background: var(--primary);
   border: none;
@@ -110,11 +101,8 @@ body {
   padding: 0.85rem 1.6rem;
   cursor: pointer;
   transition: var(--transition);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.5rem; text-decoration: none;
 }
 
 .btn:hover {
@@ -151,9 +139,7 @@ body {
   padding: 0.5rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: var(--transition);
 }
 
@@ -163,36 +149,26 @@ body {
   background: var(--bg-hover);
 }
 
-/* Header */
 .app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
 }
 
 .logo-area {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
+  display: flex; align-items: center; gap: 0.85rem;
 }
 
 .logo-icon {
   background: linear-gradient(135deg, var(--primary), #6366f1);
   color: #ffffff;
-  width: 46px;
-  height: 46px;
+  width: 46px; height: 46px;
   border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   box-shadow: 0 8px 16px var(--primary-glow);
 }
 
 .logo-title {
-  font-size: 1.6rem;
-  font-weight: 800;
+  font-size: 1.6rem; font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-main);
 }
@@ -204,12 +180,9 @@ body {
 }
 
 .header-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  display: flex; align-items: center; gap: 0.65rem;
 }
 
-/* Mode Switcher */
 .mode-switcher {
   display: flex;
   background: var(--bg-card);
@@ -226,12 +199,9 @@ body {
   color: var(--text-muted);
   padding: 0.45rem 0.85rem;
   border-radius: var(--radius-sm);
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.82rem; font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
+  display: flex; align-items: center; gap: 0.4rem;
   transition: var(--transition);
 }
 
@@ -245,7 +215,6 @@ body {
   box-shadow: 0 4px 10px var(--primary-glow);
 }
 
-/* Theme Toggle */
 .theme-toggle {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -253,13 +222,10 @@ body {
   padding: 0.45rem 0.75rem;
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 0.78rem;
+  font-weight: 700; font-size: 0.78rem;
   letter-spacing: 0.08em;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: flex; align-items: center; gap: 0.5rem;
   transition: var(--transition);
   box-shadow: var(--shadow-card);
 }
@@ -270,11 +236,9 @@ body {
 }
 
 .theme-icon {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
 }
 
-/* Token Bar */
 .token-bar {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -297,8 +261,7 @@ body {
 }
 
 .token-input-row {
-  display: flex;
-  gap: 0.5rem;
+  display: flex; gap: 0.5rem;
 }
 
 .token-input-row input {
@@ -326,13 +289,11 @@ body {
 .token-status.success { color: var(--winner); }
 .token-status.info { color: var(--text-muted); }
 
-/* search bar */
 .search-bar {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: 0.5rem 0.5rem 0.5rem 1.25rem;
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   box-shadow: var(--shadow-card);
   border: 1px solid var(--border-color);
   position: relative;
@@ -346,8 +307,7 @@ body {
 
 .search-icon {
   color: var(--primary);
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   margin-right: 0.85rem;
   flex-shrink: 0;
 }
@@ -379,12 +339,9 @@ body {
   padding: 0.85rem 1.5rem;
 }
 
-/* Quick Suggestion Chips */
 .quick-chips {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: flex; align-items: center;
+  flex-wrap: wrap; gap: 0.5rem;
   margin-top: -0.75rem;
   padding: 0 0.25rem;
 }
@@ -414,15 +371,11 @@ body {
   transform: translateY(-1px);
 }
 
-/* loading state */
 .loading-state {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: 3.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-card);
@@ -430,8 +383,7 @@ body {
 }
 
 .spinner {
-  width: 48px;
-  height: 48px;
+  width: 48px; height: 48px;
   border: 4px solid var(--border-color);
   border-top-color: var(--primary);
   border-radius: 50%;
@@ -449,8 +401,7 @@ body {
 }
 
 .loading-title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 1.15rem; font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.35rem;
 }
@@ -460,7 +411,6 @@ body {
   color: var(--text-muted);
 }
 
-/* error state */
 .error-state {
   animation: fadeIn 0.25s ease-in;
 }
@@ -472,27 +422,21 @@ body {
   text-align: center;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
 }
 
 .error-illustration {
   color: var(--loser);
   background: var(--loser-bg);
-  width: 90px;
-  height: 90px;
+  width: 90px; height: 90px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   margin-bottom: 1.25rem;
   box-shadow: 0 0 24px var(--loser-glow);
 }
 
 .error-heading {
-  font-size: 1.4rem;
-  font-weight: 700;
+  font-size: 1.4rem; font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.5rem;
 }
@@ -505,10 +449,8 @@ body {
   line-height: 1.6;
 }
 
-/* profile card */
 .profile-container {
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 1.75rem;
   animation: fadeIn 0.3s ease-out;
 }
@@ -523,15 +465,13 @@ body {
 }
 
 .profile-header {
-  display: flex;
-  gap: 1.75rem;
+  display: flex; gap: 1.75rem;
   align-items: flex-start;
   margin-bottom: 1.75rem;
 }
 
 .user-avatar {
-  width: 105px;
-  height: 105px;
+  width: 105px; height: 105px;
   border-radius: 50%;
   border: 3px solid var(--border-color);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
@@ -544,16 +484,12 @@ body {
 }
 
 .name-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: flex; justify-content: space-between; align-items: baseline;
+  flex-wrap: wrap; gap: 0.5rem;
 }
 
 .user-name {
-  font-size: 1.55rem;
-  font-weight: 800;
+  font-size: 1.55rem; font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.01em;
 }
@@ -588,20 +524,17 @@ body {
   word-break: break-word;
 }
 
-/* Stats Box */
 .stats-box {
   background: var(--bg-subtle);
   border-radius: var(--radius-md);
   padding: 1.1rem 1.75rem;
-  display: flex;
-  justify-content: space-between;
+  display: flex; justify-content: space-between;
   margin-bottom: 1.75rem;
   border: 1px solid var(--border-color);
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.3rem;
 }
 
@@ -613,12 +546,10 @@ body {
 
 .stat-value {
   font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.35rem; font-weight: 700;
   color: var(--text-main);
 }
 
-/* Metadata Grid */
 .meta-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -626,8 +557,7 @@ body {
 }
 
 .meta-item {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   gap: 0.85rem;
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -639,8 +569,7 @@ body {
 
 .meta-icon {
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   flex-shrink: 0;
 }
 
@@ -662,7 +591,6 @@ body {
   text-decoration: underline;
 }
 
-/* repositories */
 .repos-section {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
@@ -672,17 +600,14 @@ body {
 }
 
 .repos-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 1.25rem;
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--border-color);
 }
 
 .repos-title {
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-size: 1.2rem; font-weight: 700;
   color: var(--text-main);
 }
 
@@ -696,16 +621,14 @@ body {
   font-family: var(--font-mono);
   background: var(--bg-subtle);
   color: var(--primary);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.8rem; font-weight: 700;
   padding: 0.25rem 0.65rem;
   border-radius: 20px;
   border: 1px solid var(--border-color);
 }
 
 .repos-grid {
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.9rem;
 }
 
@@ -715,8 +638,7 @@ body {
   border-radius: var(--radius-md);
   padding: 1.15rem 1.35rem;
   transition: var(--transition);
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.6rem;
 }
 
@@ -728,19 +650,15 @@ body {
 }
 
 .repo-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: flex; justify-content: space-between; align-items: flex-start;
   gap: 0.75rem;
 }
 
 .repo-name-link {
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 1.05rem; font-weight: 700;
   color: var(--primary);
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
+  display: inline-flex; align-items: center;
   gap: 0.4rem;
   transition: var(--transition);
 }
@@ -766,9 +684,7 @@ body {
 }
 
 .repo-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: flex; align-items: center; flex-wrap: wrap;
   gap: 1.25rem;
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -776,16 +692,14 @@ body {
 }
 
 .repo-meta-item {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   gap: 0.35rem;
 }
 
 .lang-dot {
-  width: 10px;
-  height: 10px;
+  width: 10px; height: 10px;
   border-radius: 50%;
-  background: #f1e05a; /* Default JS */
+  background: #f1e05a;
   display: inline-block;
 }
 
@@ -796,10 +710,8 @@ body {
   font-size: 0.95rem;
 }
 
-/* battle mode */
 .battle-section {
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 1.75rem;
   animation: fadeIn 0.3s ease-out;
 }
@@ -818,8 +730,7 @@ body {
   font-family: var(--font-mono);
   background: linear-gradient(135deg, var(--primary), #a855f7);
   color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.75rem; font-weight: 700;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   margin-bottom: 0.75rem;
@@ -827,8 +738,7 @@ body {
 }
 
 .battle-title {
-  font-size: 1.75rem;
-  font-weight: 800;
+  font-size: 1.75rem; font-weight: 800;
   color: var(--text-main);
   margin-bottom: 0.5rem;
 }
@@ -849,30 +759,25 @@ body {
 }
 
 .battle-inputs-row {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   gap: 1rem;
 }
 
 .battle-input-group {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.5rem;
 }
 
 .battle-label {
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.85rem; font-weight: 700;
   color: var(--text-main);
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   gap: 0.4rem;
 }
 
 .player-dot {
-  width: 10px;
-  height: 10px;
+  width: 10px; height: 10px;
   border-radius: 50%;
   display: inline-block;
 }
@@ -900,25 +805,20 @@ body {
 
 .vs-divider {
   font-family: var(--font-mono);
-  font-weight: 800;
-  font-size: 1.1rem;
+  font-weight: 800; font-size: 1.1rem;
   color: var(--primary);
   background: var(--bg-subtle);
   border: 1px solid var(--border-color);
-  width: 44px;
-  height: 44px;
+  width: 44px; height: 44px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
   margin-top: 1.5rem;
 }
 
 .battle-action-row {
   margin-top: 1.25rem;
-  display: flex;
-  justify-content: center;
+  display: flex; justify-content: center;
 }
 
 .battle-btn {
@@ -929,10 +829,8 @@ body {
   background: linear-gradient(135deg, var(--primary), #8b5cf6);
 }
 
-/* Battle Results */
 .battle-results {
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 1.5rem;
   animation: fadeIn 0.35s ease-out;
 }
@@ -947,8 +845,7 @@ body {
 }
 
 .announcement-winner-text {
-  font-size: 1.35rem;
-  font-weight: 800;
+  font-size: 1.35rem; font-weight: 800;
   color: var(--winner);
 }
 
@@ -963,8 +860,7 @@ body {
 }
 
 .battle-cards-container {
-  display: flex;
-  gap: 1.25rem;
+  display: flex; gap: 1.25rem;
   align-items: stretch;
 }
 
@@ -975,8 +871,7 @@ body {
   border-radius: var(--radius-lg);
   padding: 1.75rem;
   box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   position: relative;
   transition: var(--transition);
 }
@@ -997,14 +892,12 @@ body {
 
 .battle-status-badge {
   position: absolute;
-  top: -14px;
-  left: 50%;
+  top: -14px; left: 50%;
   transform: translateX(-50%);
   padding: 0.3rem 1rem;
   border-radius: 20px;
   font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.8rem; font-weight: 700;
   letter-spacing: 0.05em;
   white-space: nowrap;
 }
@@ -1026,17 +919,14 @@ body {
 }
 
 .battle-user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: flex; flex-direction: column; align-items: center;
   text-align: center;
   margin-top: 0.5rem;
   margin-bottom: 1.25rem;
 }
 
 .battle-avatar {
-  width: 90px;
-  height: 90px;
+  width: 90px; height: 90px;
   border-radius: 50%;
   border: 3px solid var(--border-color);
   margin-bottom: 0.75rem;
@@ -1048,8 +938,7 @@ body {
 }
 
 .battle-user-name {
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.25rem; font-weight: 800;
   color: var(--text-main);
 }
 
@@ -1060,29 +949,24 @@ body {
   text-decoration: none;
 }
 
-/* Battle Metrics Highlight */
 .battle-metrics {
   background: var(--bg-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.25rem;
 }
 
 .metric-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   font-size: 0.88rem;
 }
 
 .metric-name {
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   gap: 0.4rem;
 }
 
@@ -1094,7 +978,7 @@ body {
 
 .metric-highlight {
   font-size: 1.05rem;
-  color: #fbbf24; /* Star gold */
+  color: #fbbf24;
 }
 
 .battle-top-repo {
@@ -1106,35 +990,27 @@ body {
 }
 
 .battle-vs-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
 }
 
 .battle-vs-badge span {
   font-family: var(--font-mono);
-  font-size: 1.1rem;
-  font-weight: 800;
+  font-size: 1.1rem; font-weight: 800;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   color: var(--text-muted);
-  width: 48px;
-  height: 48px;
+  width: 48px; height: 48px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
 }
 
-/* footer */
 .app-footer {
   text-align: center;
   padding: 1.5rem 0;
   color: var(--text-muted);
   font-size: 0.85rem;
   border-top: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
   gap: 0.35rem;
 }
 
@@ -1143,59 +1019,40 @@ body {
   color: var(--text-secondary);
 }
 
-/* responsive design */
 @media (max-width: 768px) {
   body {
     padding: 1.5rem 1rem;
   }
-  
   .app-header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: column; align-items: flex-start;
   }
-  
   .header-controls {
-    width: 100%;
-    justify-content: space-between;
+    width: 100%; justify-content: space-between;
   }
-  
   .profile-card {
     padding: 1.5rem;
   }
-
   .profile-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
+    flex-direction: column; align-items: center; text-align: center; gap: 1rem;
   }
-
   .name-row {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; align-items: center;
   }
-
   .meta-grid {
     grid-template-columns: 1fr;
   }
-
   .stats-box {
-    padding: 1rem;
-    text-align: center;
+    padding: 1rem; text-align: center;
   }
-
   .battle-inputs-row {
     flex-direction: column;
   }
-
   .vs-divider {
     margin: 0;
   }
-
   .battle-cards-container {
     flex-direction: column;
   }
-
   .battle-vs-badge {
     display: none;
   }
@@ -1205,11 +1062,9 @@ body {
   .search-bar {
     padding: 0.4rem 0.4rem 0.4rem 0.85rem;
   }
-
   .search-bar input {
     font-size: 0.88rem;
   }
-
   .search-btn {
     padding: 0.7rem 1rem;
     font-size: 0.85rem;
