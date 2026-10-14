@@ -1,14 +1,10 @@
-// ==========================================================================
-// Dev-Detective — GitHub Profile Search Client & Battle Arena
-// Sprint 3: The API Hunter (Prodesk IT)
-// Vanilla JavaScript (Fetch API, Async/Await, Promise.all, DOM Manipulation)
-// ==========================================================================
+// Dev-Detective github profile search and battle arena
 
 // Global state & configuration
 const GITHUB_API_BASE = 'https://api.github.com/users';
 let githubToken = localStorage.getItem('dev_detective_token') || '';
 
-// DOM Elements — Mode & Theme
+
 const searchModeBtn = document.getElementById('searchModeBtn');
 const battleModeBtn = document.getElementById('battleModeBtn');
 const singleSearchSection = document.getElementById('singleSearchSection');
@@ -90,9 +86,7 @@ const LANGUAGE_COLORS = {
   Shell: '#89e051'
 };
 
-// ==========================================================================
-// Utility Functions
-// ==========================================================================
+// date format utility
 
 // Format ISO timestamp into human readable string e.g. "25 Jan 2023"
 function formatDate(isoString) {
@@ -119,9 +113,7 @@ function getApiHeaders() {
   return headers;
 }
 
-// ==========================================================================
-// Phase 1 & 2: Single User Search & Endpoint Chaining
-// ==========================================================================
+// fetch user profile and repos
 
 // Fetch user profile from GitHub API
 async function fetchUserProfile(username) {
@@ -378,9 +370,7 @@ async function handleUserSearch(username) {
   }
 }
 
-// ==========================================================================
-// Phase 3: Advanced Logic & Battle Mode Architecture
-// ==========================================================================
+// battle mode logic
 
 // Fetch all repositories for a user to calculate accurate Total Stars (stargazers_count)
 async function fetchAllReposForUser(username) {
@@ -451,7 +441,7 @@ function createChallengerCardHtml(challenger, statusClass, badgeText, badgeClass
             <svg width="15" height="15" viewBox="0 0 24 24" fill="#fbbf24">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
-            Total Stars (Reduced)
+            Total Stars
           </span>
           <span class="metric-val metric-highlight">${totalStars.toLocaleString()} ★</span>
         </div>
@@ -605,9 +595,7 @@ async function handleBattleShowdown(user1, user2) {
   }
 }
 
-// ==========================================================================
-// Mode Switching & Theme Toggle
-// ==========================================================================
+// mode and theme switching
 
 function switchMode(mode) {
   if (mode === 'search') {
@@ -677,9 +665,7 @@ function clearToken() {
   tokenStatusMsg.className = 'token-status info';
 }
 
-// ==========================================================================
-// Event Listeners & Bootstrapping
-// ==========================================================================
+// event listeners
 
 function initEvents() {
   // Theme toggle
